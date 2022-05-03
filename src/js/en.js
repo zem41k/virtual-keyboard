@@ -260,8 +260,8 @@ const en = [
         code: 'Slash',
     },
     {
-        small: '',
-        shift: '',
+        small: '&uarr',
+        shift: null,
         code: 'ArrowUp',
     },
     {
@@ -300,18 +300,18 @@ const en = [
         code: 'ControlRight',
     },
     {
-        small: '',
-        shift: '',
+        small: '&larr',
+        shift: null,
         code: 'ArrowLeft',
     },
     {
-        small: '',
-        shift: '',
+        small: '&darr',
+        shift: null,
         code: 'ArrowDown',
     },
     {
-        small: '',
-        shift: '',
+        small: '&rarr',
+        shift: null,
         code: 'ArrowRight',
     }
 ]

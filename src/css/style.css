@@ -73,3 +73,64 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*--------------------*/
+.keyboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #324aff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.keyboard__row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+
+.keyboard__key {
+  width: 50px;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #a2b6ff;
+  border-radius: 5px;
+}
+
+.Tab {
+  width: 70px;
+}
+
+.CapsLock,
+.BackSlash {
+  width: 90px;
+}
+
+.ShiftLeft,
+.Backspace,
+.ShiftRight {
+  width: 110px;
+}
+
+.Enter {
+  width: 120px;
+}
+
+.Space {
+  width: 400px;
+}

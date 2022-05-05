@@ -136,9 +136,14 @@ const language = {
             code: 'BracketRight',
         },
         {
-            small: '',
+            small: '\\',
             shift: '/',
             code: 'Backslash',
+        },
+        {
+            small: 'Del',
+            shift: null,
+            code: 'Delete'
         },
         {
             small: 'CapsLock',
@@ -261,7 +266,7 @@ const language = {
             code: 'Slash',
         },
         {
-            small: '&uarr',
+            small: '&#8593',
             shift: null,
             code: 'ArrowUp',
         },
@@ -296,17 +301,17 @@ const language = {
             code: 'AltRight',
         },
         {
-            small: '&larr',
+            small: '&#8592',
             shift: null,
             code: 'ArrowLeft',
         },
         {
-            small: '&darr',
+            small: '&#8595',
             shift: null,
             code: 'ArrowDown',
         },
         {
-            small: '&rarr',
+            small: '&#8594',
             shift: null,
             code: 'ArrowRight',
         },
@@ -453,9 +458,14 @@ const language = {
             code: 'BracketRight',
         },
         {
-            small: '',
+            small: '\\',
             shift: '|',
-            code: 'BackSlash',
+            code: 'Backslash',
+        },
+        {
+            small: 'Del',
+            shift: null,
+            code: 'Delete'
         },
         {
             small: 'CapsLock',
@@ -578,7 +588,7 @@ const language = {
             code: 'Slash',
         },
         {
-            small: '&uarr',
+            small: '&#8593',
             shift: null,
             code: 'ArrowUp',
         },
@@ -613,17 +623,17 @@ const language = {
             code: 'AltRight',
         },
         {
-            small: '&larr',
+            small: '&#8592',
             shift: null,
             code: 'ArrowLeft',
         },
         {
-            small: '&darr',
+            small: '&#8595',
             shift: null,
             code: 'ArrowDown',
         },
         {
-            small: '&rarr',
+            small: '&#8594',
             shift: null,
             code: 'ArrowRight',
         },

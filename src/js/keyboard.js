@@ -14,7 +14,7 @@ export default class KeyBoard {
     constructor(rows) {
         this.rows = rows;  // порядок кнопок в рядах
         this.keyPressed = {};
-        this.inCaps = false;
+        this.isCaps = false;
     }
 
     init(lang) {
@@ -44,8 +44,27 @@ export default class KeyBoard {
         })
         document.addEventListener('keydown', this.pressButton);
         document.addEventListener('keyup', this.releaseButton);
-        // document.addEventListener('mousedown', this.pressButton);
-        // document.addEventListener('mouseup', this.pressButton);
+        document.addEventListener('mousedown', this.clickMouseButton);
+        document.addEventListener('mouseup', this.clickMouseButton);
+    }
+
+    isCapsShift(keyObj) {
+        if (!this.isCaps) {
+            this.symbol = keyObj.small;
+            this.switchKeyboardLetter('small');
+            if (this.shiftKey) {
+                this.symbol = keyObj.shift;
+                this.switchKeyboardLetter('shift');
+            }
+        } else {
+            this.symbol = keyObj.shift;
+            this.switchKeyboardLetter('shift');
+            if (this.shiftKey) {
+                this.symbol = keyObj.small;
+                this.switchKeyboardLetter('small');
+            }
+        }
+
     }
 
     pressButton = (e) => {
@@ -61,6 +80,15 @@ export default class KeyBoard {
         if (keyCode.match(/Alt/)) this.altKey = true;
         if (keyCode.match(/Alt/) && this.ctrlKey) this.switchLanguage();
         if (keyCode.match(/Control/) && this.altKey) this.switchLanguage();
+
+        if (keyCode === 'CapsLock') this.isCaps === false ? this.isCaps = true : this.isCaps = false;
+        if (keyCode.match(/Shift/)) this.shiftKey = true;
+
+        this.isCapsShift(keyObj);
+
+
+
+        this.print(keyObj, this.symbol);
     }
 
     releaseButton = (e) => {
@@ -69,6 +97,35 @@ export default class KeyBoard {
         keyObj.div.classList.remove('keyboard__key--active');
         if (keyCode.match(/Control/)) this.ctrlKey = false;
         if (keyCode.match(/Alt/)) this.altKey = false;
+        if (keyCode.match(/Shift/)) this.shiftKey = false;
+        if (!this.shiftKey && !this.isCaps) {
+            this.switchKeyboardLetter('small');
+        }
+        if (!this.shiftKey && this.isCaps) {
+            this.switchKeyboardLetter('shift');
+        }
+    }
+
+    clickMouseButton = (e) => {
+        let keyCode;
+        let eventType = e.type;
+        try {
+            keyCode = e.target.dataset.code;
+            if (!e.target.dataset.code) keyCode = e.target.closest('.keyboard__key').dataset.code;
+        } catch (error) {
+            return
+        }
+        const keyObj = this.keyButtons.find((key) => key.code === keyCode);
+        if (eventType === 'mousedown') keyObj.div.classList.add('keyboard__key--active');
+        if (eventType === 'mouseup') keyObj.div.classList.remove('keyboard__key--active');
+    }
+
+    print(keyObj, symbol) {
+        let cursorPosition = this.textArea.selectionStart;
+        let left = this.textArea.value.slice(0, cursorPosition);
+        let right = this.textArea.value.slice(cursorPosition);
+        console.log(symbol);
+
     }
 
     switchLanguage = () => {
@@ -85,5 +142,13 @@ export default class KeyBoard {
             button.shift = keyObj.shift;
             button.span.innerHTML = keyObj.small;
         })
+    }
+
+    switchKeyboardLetter(type) {
+        this.keyButtons.forEach((button) => {
+            const keyObj = this.keyBase.find((key) => key.code === button.code);
+            if (keyObj.shift) button.span.innerHTML = keyObj[type];
+        })
+
     }
 }

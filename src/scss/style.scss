@@ -73,9 +73,19 @@
         letter-spacing: 0.06em;
         font-size: 16px;
         cursor: pointer;
+        box-shadow: 5px 2px 2px rgb(55, 55, 55);
+        transition: .2s;
 
         &--active {
             background-color: aqua;
+            box-shadow: none;
+            transform: scale(0.98);
+        }
+
+        &--active-caps {
+            background-color: aqua;
+            box-shadow: none;
+            transform: scale(0.98);
         }
     }
 }

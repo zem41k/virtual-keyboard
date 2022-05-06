@@ -291,8 +291,8 @@ const language = {
             code: 'AltLeft',
         },
         {
-            small: '',
-            shift: '',
+            small: ' ',
+            shift: ' ',
             code: 'Space',
         },
         {
@@ -613,8 +613,8 @@ const language = {
             code: 'AltLeft',
         },
         {
-            small: '',
-            shift: '',
+            small: ' ',
+            shift: ' ',
             code: 'Space',
         },
         {

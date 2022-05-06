@@ -81,12 +81,16 @@ export default class KeyBoard {
         if (keyCode.match(/Alt/) && this.ctrlKey) this.switchLanguage();
         if (keyCode.match(/Control/) && this.altKey) this.switchLanguage();
 
-        if (keyCode === 'CapsLock') this.isCaps === false ? this.isCaps = true : this.isCaps = false;
+        if (keyCode === 'CapsLock') if (this.isCaps === false) {
+            this.isCaps = true;
+            keyObj.div.classList.add('keyboard__key--active-caps');
+        } else {
+            this.isCaps = false;
+            keyObj.div.classList.remove('keyboard__key--active-caps');
+        }
         if (keyCode.match(/Shift/)) this.shiftKey = true;
 
         this.isCapsShift(keyObj);
-
-
 
         this.print(keyObj, this.symbol);
     }
@@ -116,15 +120,45 @@ export default class KeyBoard {
             return
         }
         const keyObj = this.keyButtons.find((key) => key.code === keyCode);
-        if (eventType === 'mousedown') keyObj.div.classList.add('keyboard__key--active');
-        if (eventType === 'mouseup') keyObj.div.classList.remove('keyboard__key--active');
+
+        if (eventType === 'mousedown') {
+            keyObj.div.classList.add('keyboard__key--active');
+            if (keyCode.match(/Shift/)) this.shiftKey = true;
+            if (keyCode === 'CapsLock') if (this.isCaps === false) {
+                this.isCaps = true;
+                keyObj.div.classList.add('keyboard__key--active-caps');
+            } else {
+                this.isCaps = false;
+                keyObj.div.classList.remove('keyboard__key--active-caps');
+            }
+        }
+        if (eventType === 'mouseup') {
+            keyObj.div.classList.remove('keyboard__key--active');
+            if (keyCode.match(/Shift/)) this.shiftKey = false;
+        }
+        this.isCapsShift(keyObj);
     }
 
     print(keyObj, symbol) {
         let cursorPosition = this.textArea.selectionStart;
         let left = this.textArea.value.slice(0, cursorPosition);
         let right = this.textArea.value.slice(cursorPosition);
-        console.log(symbol);
+        if (!keyObj.isFnKey) {
+            this.textArea.value = `${left}${symbol}${right}`;
+            cursorPosition += 1;
+        } else if (keyObj.code === 'Tab') {
+            this.textArea.value = `${left}\t${right}`;
+            cursorPosition += 1;
+        } else if (keyObj.code === 'Backspace') {
+            this.textArea.value = `${left.slice(0, cursorPosition - 1)}${right}`;
+            cursorPosition -= 1;
+        } else if (keyObj.code === 'Delete') {
+            this.textArea.value = `${left}${right.slice(1)}`;
+        } else if (keyObj.code === 'Enter') {
+            this.textArea.value = `${left}\n${right}`;
+            cursorPosition += 1;
+        }
+        this.textArea.setSelectionRange(cursorPosition, cursorPosition);
 
     }
 

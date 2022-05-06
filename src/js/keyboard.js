@@ -42,6 +42,7 @@ export default class KeyBoard {
                 }
             })
         })
+        this.textArea.focus();
         document.addEventListener('keydown', this.pressButton);
         document.addEventListener('keyup', this.releaseButton);
         document.addEventListener('mousedown', this.clickMouseButton);
@@ -111,6 +112,7 @@ export default class KeyBoard {
     }
 
     clickMouseButton = (e) => {
+        this.textArea.focus();
         let keyCode;
         let eventType = e.type;
         try {
@@ -121,7 +123,9 @@ export default class KeyBoard {
         }
         const keyObj = this.keyButtons.find((key) => key.code === keyCode);
 
+
         if (eventType === 'mousedown') {
+            this.textArea.focus();
             keyObj.div.classList.add('keyboard__key--active');
             if (keyCode.match(/Shift/)) this.shiftKey = true;
             if (keyCode === 'CapsLock') if (this.isCaps === false) {
@@ -131,12 +135,16 @@ export default class KeyBoard {
                 this.isCaps = false;
                 keyObj.div.classList.remove('keyboard__key--active-caps');
             }
+            this.isCapsShift(keyObj);
+            this.print(keyObj, this.symbol);
         }
         if (eventType === 'mouseup') {
+            this.textArea.focus();
             keyObj.div.classList.remove('keyboard__key--active');
             if (keyCode.match(/Shift/)) this.shiftKey = false;
+            this.isCapsShift(keyObj);
         }
-        this.isCapsShift(keyObj);
+
     }
 
     print(keyObj, symbol) {

@@ -1,11 +1,10 @@
 export function setLocalStorage(lang) {
-    localStorage.setItem('lang', lang);
+  localStorage.setItem('lang', lang);
 }
 
 export function getLocalStorage() {
-    if (localStorage.getItem('lang')) {
-        return localStorage.getItem('lang');
-    } else {
-        return 'ru';
-    }
+  if (localStorage.getItem('lang')) {
+    return localStorage.getItem('lang');
+  }
+  return 'ru';
 }

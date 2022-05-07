@@ -36,7 +36,8 @@
 }
 
 .textarea {
-    border: 2px solid black;
+    border: 2px solid rgb(50, 74, 255);
+    color: rgb(32, 48, 171);
     border-radius: 5px;
     font-family: Arial, saint-serif;
     font-size: 16px;
@@ -75,6 +76,8 @@
         cursor: pointer;
         box-shadow: 5px 2px 2px rgb(55, 55, 55);
         transition: .2s;
+        overflow: hidden;
+        text-shadow: 0px 0px 1px rgb(71, 62, 255);
 
         &--active {
             background-color: aqua;
@@ -87,27 +90,28 @@
             box-shadow: none;
             transform: scale(0.98);
         }
+
     }
-}
 
-.Tab {
-    width: 70px;
-}
+    .Tab {
+        width: 70px;
+    }
 
-.CapsLock {
-    width: 90px;
-}
+    .CapsLock {
+        width: 90px;
+    }
 
-.ShiftLeft,
-.Backspace,
-.ShiftRight {
-    width: 110px;
-}
+    .ShiftLeft,
+    .Backspace,
+    .ShiftRight {
+        width: 110px;
+    }
 
-.Enter {
-    width: 120px;
-}
+    .Enter {
+        width: 120px;
+    }
 
-.Space {
-    width: 400px;
+    .Space {
+        width: 400px;
+    }
 }

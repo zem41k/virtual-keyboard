@@ -12,5 +12,6 @@ module.exports = {
   },
   rules: {
     'import/extensions': [0],
+    'no-param-reassign': ["error", { "props": false }]
   },
 };

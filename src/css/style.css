@@ -116,7 +116,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .textarea {
-  border: 2px solid black;
+  border: 2px solid #324aff;
+  color: #2030ab;
   border-radius: 5px;
   font-family: Arial, saint-serif;
   font-size: 16px;
@@ -169,6 +170,8 @@ h1, h2, h3, h4, h5, h6 {
           box-shadow: 5px 2px 2px #373737;
   -webkit-transition: .2s;
   transition: .2s;
+  overflow: hidden;
+  text-shadow: 0px 0px 1px #473eff;
 }
 
 .keyboard__key--active {
@@ -187,24 +190,24 @@ h1, h2, h3, h4, h5, h6 {
           transform: scale(0.98);
 }
 
-.Tab {
+.keyboard .Tab {
   width: 70px;
 }
 
-.CapsLock {
+.keyboard .CapsLock {
   width: 90px;
 }
 
-.ShiftLeft,
-.Backspace,
-.ShiftRight {
+.keyboard .ShiftLeft,
+.keyboard .Backspace,
+.keyboard .ShiftRight {
   width: 110px;
 }
 
-.Enter {
+.keyboard .Enter {
   width: 120px;
 }
 
-.Space {
+.keyboard .Space {
   width: 400px;
 }

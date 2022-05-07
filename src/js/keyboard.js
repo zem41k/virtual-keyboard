@@ -6,7 +6,8 @@ import * as storage from './localStorage.js';
 const main = create('main', 'main');
 
 create('h1', 'main__title', 'RSS Virtual Keyboard', main);
-create('h2', 'main__text', 'Windows keyboard', main);
+create('h2', 'main__text', 'Клавиатура создана в операционной системе Windows', main);
+create('h2', 'main__text', 'Для переключения языка комбинация: левыe ctrl + alt', main);
 
 export default class KeyBoard {
   constructor(rows) {

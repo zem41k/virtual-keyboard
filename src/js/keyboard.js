@@ -143,6 +143,7 @@ export default class KeyBoard {
 
   releaseMouseButton = () => {
     this.textArea.focus();
+    if (!this.keyPressed.keyObj) return;
     this.keyPressed.keyObj.div.classList.remove('keyboard__key--active');
     if (this.keyPressed.keyCode.match(/Shift/)) this.shiftKey = false;
     this.isCapsShift(this.keyPressed.keyObj);

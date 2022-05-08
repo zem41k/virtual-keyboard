@@ -48,8 +48,8 @@ export default class KeyBoard {
     this.textArea.focus();
     document.addEventListener('keydown', this.pressButton);
     document.addEventListener('keyup', this.releaseButton);
-    document.addEventListener('mousedown', this.clickMouseButton);
-    document.addEventListener('mouseup', this.clickMouseButton);
+    document.addEventListener('mousedown', this.pressMouseButton);
+    document.addEventListener('mouseup', this.releaseMouseButton);
   }
 
   isCapsShift(keyObj) {
@@ -114,10 +114,9 @@ export default class KeyBoard {
     }
   };
 
-  clickMouseButton = (e) => {
+  pressMouseButton = (e) => {
     this.textArea.focus();
     let keyCode;
-    const eventType = e.type;
     try {
       keyCode = e.target.dataset.code;
       if (!e.target.dataset.code) keyCode = e.target.closest('.keyboard__key').dataset.code;
@@ -125,29 +124,28 @@ export default class KeyBoard {
       return;
     }
     const keyObj = this.keyButtons.find((key) => key.code === keyCode);
-
-    if (eventType === 'mousedown') {
-      this.textArea.focus();
-      keyObj.div.classList.add('keyboard__key--active');
-      if (keyCode.match(/Shift/)) this.shiftKey = true;
-      if (keyCode === 'CapsLock') {
-        if (this.isCaps === false) {
-          this.isCaps = true;
-          keyObj.div.classList.add('keyboard__key--active-caps');
-        } else {
-          this.isCaps = false;
-          keyObj.div.classList.remove('keyboard__key--active-caps');
-        }
+    this.keyPressed = { keyObj, keyCode };
+    this.textArea.focus();
+    keyObj.div.classList.add('keyboard__key--active');
+    if (keyCode.match(/Shift/)) this.shiftKey = true;
+    if (keyCode === 'CapsLock') {
+      if (this.isCaps === false) {
+        this.isCaps = true;
+        keyObj.div.classList.add('keyboard__key--active-caps');
+      } else {
+        this.isCaps = false;
+        keyObj.div.classList.remove('keyboard__key--active-caps');
       }
-      this.isCapsShift(keyObj);
-      this.print(keyObj, this.symbol);
     }
-    if (eventType === 'mouseup') {
-      this.textArea.focus();
-      keyObj.div.classList.remove('keyboard__key--active');
-      if (keyCode.match(/Shift/)) this.shiftKey = false;
-      this.isCapsShift(keyObj);
-    }
+    this.isCapsShift(keyObj);
+    this.print(keyObj, this.symbol);
+  };
+
+  releaseMouseButton = () => {
+    this.textArea.focus();
+    this.keyPressed.keyObj.div.classList.remove('keyboard__key--active');
+    if (this.keyPressed.keyCode.match(/Shift/)) this.shiftKey = false;
+    this.isCapsShift(this.keyPressed.keyObj);
   };
 
   print(keyObj, symbol) {
